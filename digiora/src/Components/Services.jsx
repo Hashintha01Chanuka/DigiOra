@@ -40,7 +40,7 @@ const ServicesPage = () => {
     
     const fetchServices = async () => {
       try {
-        const response = await fetch(`${API_BASE_URL}/services`);
+        const response = await fetch(`${API_BASE_URL}/api/services`);
         const data = await response.json();
         if (data.success && data.data) {
           setFetchedServices(data.data);

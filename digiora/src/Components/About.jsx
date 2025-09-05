@@ -131,7 +131,7 @@ const AboutUsPage = () => {
 
   const fetchGalleryImages = async () => {
     try {
-      const response = await fetch(`${API_BASE_URL}/gallery?status=active`);
+      const response = await fetch(`${API_BASE_URL}/api/gallery?status=active`);
       if (response.ok) {
         const data = await response.json();
         console.log('Gallery API Response:', data);
