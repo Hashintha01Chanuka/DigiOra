@@ -40,6 +40,14 @@ app.use((req, res, next) => {
   next();
 });
 
+app.get("/", (req, res) => {
+  res.json({
+    success: true,
+    message: "Backend is running on Vercel!",
+  });
+});
+
+
 // ================== Routes ==================
 app.use("/api/contacts", require("./routes/contact"));
 app.use("/api/images", require("./routes/images"));
