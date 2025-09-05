@@ -21,6 +21,7 @@ app.use(
       "http://localhost:5174", // Add admin panel port
       "http://localhost:3000", // Add common React port
       "http://localhost:5001", // Add backend port for testing
+      "https://digi-ora-frontend.vercel.app"
     ],
     credentials: true,
   })
