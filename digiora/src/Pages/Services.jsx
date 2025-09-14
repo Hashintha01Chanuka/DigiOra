@@ -261,7 +261,7 @@ const Services = () => {
                       <img
                         src={video.thumbnailUrl}
                         alt={video.title}
-                        className="w-full h-48 object-cover"
+                        className="w-full h-58 object-cover"
                         onClick={() => handleVideoClick(video)}
                       />
 

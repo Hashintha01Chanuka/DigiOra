@@ -96,7 +96,7 @@ const Contact = () => {
           transition-delay: 400ms;
         }
       `}</style>
-      <section id="contact" className="scroll-animation py-24 bg-white">
+      <section id="contact" className="scroll-animation py-4 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="scroll-animation delay-200 text-center mb-20">
             <div className="inline-block px-4 py-2 bg-red-50 text-red-600 text-sm font-medium rounded-full mb-6">

@@ -103,25 +103,25 @@ const Images = () => {
 
               switch (index) {
                 case 0:
-                  gridStyles = "col-span-2 h-60";
+                  gridStyles = "col-span-2 row-span-2 h-90";
                   break;
                 case 1:
-                  gridStyles = "col-span-2 h-60";
+                  gridStyles = "col-span-1 h-90";
                   break;
                 case 2:
-                  gridStyles = "col-span-1 h-32";
+                  gridStyles = "col-span-1 h-90";
                   break;
                 case 3:
-                  gridStyles = "col-span-3 h-32";
+                  gridStyles = "col-span-1 h-0";
                   break;
                 case 4:
-                  gridStyles = "col-span-2 h-40";
+                  gridStyles = "col-span-2 h-130";
                   break;
                 case 5:
-                  gridStyles = "col-span-1 h-40";
+                  gridStyles = "col-span-2 h-130";
                   break;
                 case 6:
-                  gridStyles = "col-span-1 h-40";
+                  gridStyles = "col-span-1 h-90";
                   break;
                 default:
                   gridStyles = "col-span-1 h-32";
