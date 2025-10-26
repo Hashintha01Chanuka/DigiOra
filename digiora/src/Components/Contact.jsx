@@ -94,7 +94,7 @@ const ContactPage = () => {
       icon: Mail,
       title: "Email Us",
       description: "Get in touch via email for detailed inquiries",
-      primary: "hello@digioramedia.com",
+      primary: "digiora.contact@gmail.com",
       action: "Send Email",
       gradient: "from-red-500 to-red-600"
     },
@@ -285,7 +285,7 @@ const ContactPage = () => {
                         href="mailto:hello@digioramedia.com"
                         className="text-white/80 hover:text-white transition-colors"
                       >
-                        hello@digioramedia.com
+                        digiora.contact@gmail.com
                       </a>
                     </div>
                   </div>
@@ -352,10 +352,10 @@ const ContactPage = () => {
       </section>
 
       {/* Main Contact Form */}
-      <section className="py-24 bg-gray-50">
+      {/* <section className="py-24 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
-            {/* Form */}
+            
             <div className="scroll-animation">
               <div className="bg-white p-10 rounded-2xl shadow-lg border border-gray-100">
                 <h3 className="text-3xl font-semibold text-gray-900 mb-2">Send us a message</h3>
@@ -485,10 +485,10 @@ const ContactPage = () => {
                   </button>
                 </form>
               </div>
-            </div>
+            </div> */}
 
             {/* Contact Info */}
-            <div className="scroll-animation delay-400">
+            {/* <div className="scroll-animation delay-400">
               <div className="space-y-8">
                 <div>
                   <h3 className="text-2xl font-semibold text-gray-900 mb-6">Office Information</h3>
@@ -566,7 +566,7 @@ const ContactPage = () => {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* Testimonials 
       <section className="py-24 bg-white">
