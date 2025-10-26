@@ -135,7 +135,7 @@ const Contact = () => {
                     Email Us
                   </h3>
                   <p className="text-gray-600 mb-2 text-lg hover:text-red-600 transition-colors cursor-pointer">
-                    hello@digioramedia.com
+                    digiora.contact@gmail.com
                   </p>
                 </div>
               </div>
