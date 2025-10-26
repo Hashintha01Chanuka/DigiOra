@@ -12,8 +12,7 @@ const Contact = () => {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState("");
-  const WEB3FORMS_KEY =
-    import.meta.env.VITE_WEB3FORMS_ACCESS_KEY || "YOUR_ACCESS_KEY_HERE";
+  const WEB3FORMS_KEY = "aa337f26-d134-4cbf-b3c3-6fa332a69781";
 
   useEffect(() => {
     const observer = new window.IntersectionObserver(

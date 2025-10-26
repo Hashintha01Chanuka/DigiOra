@@ -156,7 +156,7 @@ const Footer = () => {
                 href="mailto:hello@digioramedia.com"
                 className="text-gray-400 hover:text-red-400 transition-colors duration-300 block"
               >
-                hello@digioramedia.com
+                digiora.contact@gmail.com
               </a>
               <a
                 href="tel:+94778500989"
