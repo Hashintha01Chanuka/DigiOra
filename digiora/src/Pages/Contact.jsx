@@ -12,7 +12,8 @@ const Contact = () => {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState("");
-  const API_BASE_URL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:5001';
+  const WEB3FORMS_KEY =
+    import.meta.env.VITE_WEB3FORMS_ACCESS_KEY || "YOUR_ACCESS_KEY_HERE";
 
   useEffect(() => {
     const observer = new window.IntersectionObserver(
@@ -46,12 +47,23 @@ const Contact = () => {
     setSubmitStatus("");
 
     try {
-      const response = await fetch(`${API_BASE_URL}/api/contacts`, {
+      const submissionData = {
+        access_key: WEB3FORMS_KEY,
+        name: `${formData.firstName} ${formData.lastName}`.trim(),
+        email: formData.email,
+        phone: formData.phone,
+        company: formData.company,
+        message: formData.message,
+        subject: "New contact form submission",
+      };
+
+      const response = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          Accept: "application/json",
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(submissionData),
       });
 
       const data = await response.json();
@@ -67,6 +79,7 @@ const Contact = () => {
           message: "",
         });
       } else {
+        console.error("Web3Forms error:", data);
         setSubmitStatus("error");
       }
     } catch (error) {
@@ -124,7 +137,6 @@ const Contact = () => {
                   <p className="text-gray-600 mb-2 text-lg hover:text-red-600 transition-colors cursor-pointer">
                     hello@digioramedia.com
                   </p>
-                 
                 </div>
               </div>
 
@@ -137,15 +149,12 @@ const Contact = () => {
                     Call Us
                   </h3>
                   <p className="text-gray-600 mb-2 text-lg hover:text-red-600 transition-colors cursor-pointer">
-                   +94778500989
+                    +94778500989
                   </p>
-                  
                 </div>
               </div>
 
-              <div className="flex items-start gap-6 group">
-             
-              </div>
+              <div className="flex items-start gap-6 group"></div>
             </div>
 
             <div className="bg-gradient-to-br from-gray-50 to-white p-10 rounded-2xl shadow-lg border border-gray-100">
@@ -153,8 +162,7 @@ const Contact = () => {
                 <div className="space-y-8">
                   {submitStatus === "success" && (
                     <div className="bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded-lg">
-                      Thank you for your message! We will get back to you within
-                      24 hours.
+                      Thank you for your message! We will get back to you soon.
                     </div>
                   )}
 

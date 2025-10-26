@@ -8,7 +8,8 @@ const Footer = () => {
   const [email, setEmail] = useState("");
   const [isSubscribing, setIsSubscribing] = useState(false);
   const [subscriptionStatus, setSubscriptionStatus] = useState(null); // 'success', 'error', or null
-  const API_BASE_URL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:5001';
+  const API_BASE_URL =
+    import.meta.env.VITE_BACKEND_URL || "http://localhost:5001";
 
   const handleNewsletterSubmit = async (e) => {
     e.preventDefault();
@@ -165,13 +166,13 @@ const Footer = () => {
               </a>
               <div className="flex space-x-4">
                 <a
-                  href="#"
+                  href="https://youtube.com/@aharenna2975?si=epk3PAXDjsuf0RDz"
                   className="text-gray-400 hover:text-red-400 transition-colors duration-300"
                 >
                   Youtube
                 </a>
                 <a
-                  href="#"
+                  href="https://www.tiktok.com/@aharenna?_t=ZS-90sB0lMCpAw&_r=1"
                   className="text-gray-400 hover:text-red-400 transition-colors duration-300"
                 >
                   Tiktok
@@ -236,8 +237,16 @@ const Footer = () => {
             <p className="text-gray-400 text-sm mb-4 md:mb-0">
               &copy; {currentYear} DigiOra Media. All rights reserved.
             </p>
-            <div className="flex flex-wrap gap-6 text-gray-400 text-sm">
-              Designed & Developed by WHYTEQ (Pvt) Ltd
+            <div className="flex flex-wrap gap-1 text-gray-400 text-sm items-center">
+              <span>Designed & Developed by</span>
+              <a
+                href="https://www.whyteq.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-red-400 hover:text-red-500 transition-colors duration-300 font-medium"
+              >
+                WHYTEQ (Pvt) Ltd
+              </a>
             </div>
           </div>
         </div>
