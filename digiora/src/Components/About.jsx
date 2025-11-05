@@ -35,7 +35,7 @@ const AboutUsPage = () => {
 
   // API Base URL configuration
   const API_BASE_URL =
-    import.meta.env.https://digi-ora-backend.vercel.app/ || "https://digi-ora-backend.vercel.app//api";
+    import.meta.env.https://digi-ora-backend.vercel.app || "https://digi-ora-backend.vercel.app/api";
 
   useEffect(() => {
     // Add styles to document head instead of using jsx prop

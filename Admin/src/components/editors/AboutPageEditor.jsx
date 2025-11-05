@@ -71,7 +71,7 @@ const AboutPageEditor = () => {
   ];
 
   // API Base URL configuration
-  const API_BASE_URL = "https://digi-ora-backend.vercel.app//api";
+  const API_BASE_URL = "https://digi-ora-backend.vercel.app/api";
 
   useEffect(() => {
     loadGalleryImages();

@@ -26,7 +26,7 @@ const AddImage = () => {
   const fetchImages = async () => {
     try {
       const response = await fetch(
-        "https://digi-ora-backend.vercel.app//api/images"
+        "https://digi-ora-backend.vercel.app/api/images"
       );
       const data = await response.json();
       console.log(data);
@@ -113,7 +113,7 @@ const AddImage = () => {
         formData.append("image", fileObj.file);
 
         const response = await fetch(
-          "https://digi-ora-backend.vercel.app//api/images/upload",
+          "https://digi-ora-backend.vercel.app/api/images/upload",
           {
             method: "POST",
             body: formData,
@@ -158,7 +158,7 @@ const AddImage = () => {
 
     try {
       const response = await fetch(
-        `https://digi-ora-backend.vercel.app//api/images/${publicId}`,
+        `https://digi-ora-backend.vercel.app/api/images/${publicId}`,
         {
           method: "DELETE",
         }
@@ -207,7 +207,7 @@ const AddImage = () => {
       formData.append("image", file);
 
       const response = await fetch(
-        `https://digi-ora-backend.vercel.app//api/images/${editingImageId}`,
+        `https://digi-ora-backend.vercel.app/api/images/${editingImageId}`,
         {
           method: "PUT",
           body: formData,

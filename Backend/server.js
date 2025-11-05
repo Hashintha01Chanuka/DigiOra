@@ -20,7 +20,7 @@ app.use(
       process.env.FRONTEND_URL || "http://localhost:5173",
       "http://localhost:5174", // Add admin panel port
       "http://localhost:3000", // Add common React port
-      "https://digi-ora-backend.vercel.app/", // Add backend port for testing
+      "https://digi-ora-backend.vercel.app", // Add backend port for testing
       "https://digi-ora-frontend.vercel.app",
       "https://www.digioramedia.com",
       "https://digi-ora-admin.vercel.app",
