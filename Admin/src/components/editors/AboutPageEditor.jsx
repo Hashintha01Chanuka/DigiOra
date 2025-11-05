@@ -1,64 +1,87 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { 
-  Plus, Edit, Trash2, Upload, X, Save, Eye, 
-  ImageIcon, Calendar, Star, Search, Filter, RefreshCw, 
-  AlertCircle, Check, Camera, Palette, Sparkles,
-  Grid3X3, List, MoreVertical, Download, Share2
-} from 'lucide-react';
+import React, { useState, useEffect, useRef } from "react";
+import {
+  Plus,
+  Edit,
+  Trash2,
+  Upload,
+  X,
+  Save,
+  Eye,
+  ImageIcon,
+  Calendar,
+  Star,
+  Search,
+  Filter,
+  RefreshCw,
+  AlertCircle,
+  Check,
+  Camera,
+  Palette,
+  Sparkles,
+  Grid3X3,
+  List,
+  MoreVertical,
+  Download,
+  Share2,
+} from "lucide-react";
 
 const AboutPageEditor = () => {
   const [galleryImages, setGalleryImages] = useState([]);
   const [selectedFiles, setSelectedFiles] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingImage, setEditingImage] = useState(null);
-  const [imagePreview, setImagePreview] = useState('');
-  const [searchTerm, setSearchTerm] = useState('');
-  const [filterCategory, setFilterCategory] = useState('');
-  const [viewMode, setViewMode] = useState('grid');
+  const [imagePreview, setImagePreview] = useState("");
+  const [searchTerm, setSearchTerm] = useState("");
+  const [filterCategory, setFilterCategory] = useState("");
+  const [viewMode, setViewMode] = useState("grid");
   const [loading, setLoading] = useState(false);
   const [uploading, setUploading] = useState(false);
   const [dragOver, setDragOver] = useState(false);
-  const [notification, setNotification] = useState({ show: false, message: '', type: '' });
+  const [notification, setNotification] = useState({
+    show: false,
+    message: "",
+    type: "",
+  });
   const [selectedImages, setSelectedImages] = useState([]);
-  const [bulkAction, setBulkAction] = useState('');
+  const [bulkAction, setBulkAction] = useState("");
   const [stats, setStats] = useState({});
   const [formData, setFormData] = useState({
-    alt: '',
-    category: '',
-    description: '',
-    tags: '',
-    image: null
+    alt: "",
+    category: "",
+    description: "",
+    tags: "",
+    image: null,
   });
 
   const fileInputRef = useRef(null);
 
   const categories = [
-    'Digital Marketing Campaign',
-    'Brand Design Project', 
-    'Social Media Content',
-    'SEO Analytics Dashboard',
-    'Mobile App Interface',
-    'Business Strategy Session',
-    'Data Analytics',
-    'Creative Design Process',
-    'Team Collaboration',
-    'Website Development',
-    'Content Creation',
-    'Email Marketing'
+    "Digital Marketing Campaign",
+    "Brand Design Project",
+    "Social Media Content",
+    "SEO Analytics Dashboard",
+    "Mobile App Interface",
+    "Business Strategy Session",
+    "Data Analytics",
+    "Creative Design Process",
+    "Team Collaboration",
+    "Website Development",
+    "Content Creation",
+    "Email Marketing",
   ];
 
   // API Base URL configuration
-  const API_BASE_URL = 'http://localhost:5001/api';
+  const API_BASE_URL = "VITE_BACKEND_URL/api";
 
   useEffect(() => {
     loadGalleryImages();
     loadStats();
   }, []);
 
-  const showNotification = (message, type = 'success') => {
+  const showNotification = (message, type = "success") => {
     setNotification({ show: true, message, type });
     setTimeout(() => {
-      setNotification({ show: false, message: '', type: '' });
+      setNotification({ show: false, message: "", type: "" });
     }, 4000);
   };
 
@@ -70,49 +93,59 @@ const AboutPageEditor = () => {
         const data = await response.json();
         if (data.success) {
           setGalleryImages(data.data || []);
-          showNotification('Gallery images loaded successfully!');
+          showNotification("Gallery images loaded successfully!");
         } else {
-          throw new Error(data.message || 'Failed to load gallery images');
+          throw new Error(data.message || "Failed to load gallery images");
         }
       } else {
         const errorData = await response.json();
-        throw new Error(errorData.message || 'Failed to load gallery images');
+        throw new Error(errorData.message || "Failed to load gallery images");
       }
     } catch (error) {
-      console.error('Error loading gallery images:', error);
+      console.error("Error loading gallery images:", error);
       // Fallback to mock data only in development
-      if (process.env.NODE_ENV === 'development') {
+      if (process.env.NODE_ENV === "development") {
         // Mock data
         const mockData = [
           {
             _id: 1,
-            imageUrl: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-            title: 'Digital Marketing Strategy',
-            category: 'Digital Marketing Campaign',
-            description: 'Comprehensive digital marketing strategy showcase with modern analytics dashboard',
-            tags: ['marketing', 'strategy', 'digital', 'analytics'],
-            createdAt: '2024-01-15',
-            status: 'active',
+            imageUrl:
+              "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+            title: "Digital Marketing Strategy",
+            category: "Digital Marketing Campaign",
+            description:
+              "Comprehensive digital marketing strategy showcase with modern analytics dashboard",
+            tags: ["marketing", "strategy", "digital", "analytics"],
+            createdAt: "2024-01-15",
+            status: "active",
             fileSize: 2400000,
-            dimensions: { width: 1920, height: 1080 }
+            dimensions: { width: 1920, height: 1080 },
           },
           {
             _id: 2,
-            imageUrl: 'https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-            title: 'Brand Identity Design',
-            category: 'Brand Design Project',
-            description: 'Modern brand identity and design solutions for corporate clients',
-            tags: ['branding', 'design', 'identity', 'corporate'],
-            createdAt: '2024-01-14',
-            status: 'active',
+            imageUrl:
+              "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+            title: "Brand Identity Design",
+            category: "Brand Design Project",
+            description:
+              "Modern brand identity and design solutions for corporate clients",
+            tags: ["branding", "design", "identity", "corporate"],
+            createdAt: "2024-01-14",
+            status: "active",
             fileSize: 3100000,
-            dimensions: { width: 1600, height: 900 }
-          }
+            dimensions: { width: 1600, height: 900 },
+          },
         ];
         setGalleryImages(mockData);
-        showNotification('Using offline data. Please check your connection.', 'warning');
+        showNotification(
+          "Using offline data. Please check your connection.",
+          "warning"
+        );
       } else {
-        showNotification('Error loading gallery images. Please try again.', 'error');
+        showNotification(
+          "Error loading gallery images. Please try again.",
+          "error"
+        );
       }
     }
     setLoading(false);
@@ -126,7 +159,7 @@ const AboutPageEditor = () => {
         setStats(data.data);
       }
     } catch (error) {
-      console.error('Error loading stats:', error);
+      console.error("Error loading stats:", error);
     }
   };
 
@@ -139,11 +172,11 @@ const AboutPageEditor = () => {
   const addFiles = (files) => {
     const validFiles = files.filter((file) => {
       if (!file.type.startsWith("image/")) {
-        showNotification(`${file.name} is not an image file`, 'error');
+        showNotification(`${file.name} is not an image file`, "error");
         return false;
       }
       if (file.size > 5 * 1024 * 1024) {
-        showNotification(`${file.name} is too large (max 5MB)`, 'error');
+        showNotification(`${file.name} is too large (max 5MB)`, "error");
         return false;
       }
       return true;
@@ -154,7 +187,7 @@ const AboutPageEditor = () => {
       id: Math.random().toString(36).substr(2, 9),
       preview: URL.createObjectURL(file),
       name: file.name,
-      size: file.size
+      size: file.size,
     }));
 
     setSelectedFiles((prev) => [...prev, ...newFiles]);
@@ -189,162 +222,177 @@ const AboutPageEditor = () => {
   // Upload multiple images
   const uploadImages = async () => {
     if (selectedFiles.length === 0) {
-      showNotification('Please select at least one image', 'error');
+      showNotification("Please select at least one image", "error");
       return;
     }
 
     setUploading(true);
-    
+
     try {
       const uploadPromises = selectedFiles.map(async (fileObj, index) => {
         const formData = new FormData();
-        formData.append('image', fileObj.file);
-        formData.append('title', fileObj.name.split('.')[0].replace(/[_-]/g, ' ')); // Use filename as title
-        formData.append('category', 'Digital Marketing Campaign'); // Default category
-        formData.append('description', '');
-        formData.append('tags', '');
+        formData.append("image", fileObj.file);
+        formData.append(
+          "title",
+          fileObj.name.split(".")[0].replace(/[_-]/g, " ")
+        ); // Use filename as title
+        formData.append("category", "Digital Marketing Campaign"); // Default category
+        formData.append("description", "");
+        formData.append("tags", "");
 
         const response = await fetch(`${API_BASE_URL}/gallery`, {
-          method: 'POST',
-          body: formData
+          method: "POST",
+          body: formData,
         });
 
         if (!response.ok) {
           const errorData = await response.json();
-          throw new Error(errorData.message || 'Upload failed');
+          throw new Error(errorData.message || "Upload failed");
         }
 
         return response.json();
       });
 
       const results = await Promise.all(uploadPromises);
-      const successful = results.filter(result => result.success);
-      
+      const successful = results.filter((result) => result.success);
+
       if (successful.length > 0) {
-        selectedFiles.forEach((fileObj) => URL.revokeObjectURL(fileObj.preview));
+        selectedFiles.forEach((fileObj) =>
+          URL.revokeObjectURL(fileObj.preview)
+        );
         setSelectedFiles([]);
-        showNotification(`Successfully uploaded ${successful.length} image(s)!`);
+        showNotification(
+          `Successfully uploaded ${successful.length} image(s)!`
+        );
         loadGalleryImages();
         loadStats();
       } else {
-        throw new Error('All uploads failed');
+        throw new Error("All uploads failed");
       }
     } catch (error) {
-      console.error('Upload error:', error);
-      showNotification(error.message || 'Upload failed. Please try again.', 'error');
+      console.error("Upload error:", error);
+      showNotification(
+        error.message || "Upload failed. Please try again.",
+        "error"
+      );
     } finally {
       setUploading(false);
     }
   };
 
   const handleDelete = async (id) => {
-    if (window.confirm('Are you sure you want to delete this gallery image?')) {
+    if (window.confirm("Are you sure you want to delete this gallery image?")) {
       try {
         const response = await fetch(`${API_BASE_URL}/gallery/${id}`, {
-          method: 'DELETE'
+          method: "DELETE",
         });
 
         if (response.ok) {
-          setGalleryImages(prev => prev.filter(img => img._id !== id));
-          showNotification('Gallery image deleted successfully!');
+          setGalleryImages((prev) => prev.filter((img) => img._id !== id));
+          showNotification("Gallery image deleted successfully!");
           loadStats();
         } else {
-          throw new Error('Failed to delete image');
+          throw new Error("Failed to delete image");
         }
       } catch (error) {
-        console.error('Error deleting image:', error);
-        showNotification('Error deleting gallery image.', 'error');
+        console.error("Error deleting image:", error);
+        showNotification("Error deleting gallery image.", "error");
       }
     }
   };
 
   const toggleStatus = async (id) => {
     try {
-      const image = galleryImages.find(img => img._id === id);
-      const newStatus = image.status === 'active' ? 'inactive' : 'active';
-      
+      const image = galleryImages.find((img) => img._id === id);
+      const newStatus = image.status === "active" ? "inactive" : "active";
+
       const response = await fetch(`${API_BASE_URL}/gallery/${id}/status`, {
-        method: 'PATCH',
+        method: "PATCH",
         headers: {
-          'Content-Type': 'application/json'
+          "Content-Type": "application/json",
         },
-        body: JSON.stringify({ status: newStatus })
+        body: JSON.stringify({ status: newStatus }),
       });
 
       if (response.ok) {
-        setGalleryImages(prev => 
-          prev.map(img => 
+        setGalleryImages((prev) =>
+          prev.map((img) =>
             img._id === id ? { ...img, status: newStatus } : img
           )
         );
-        showNotification(`Image ${newStatus === 'active' ? 'activated' : 'deactivated'} successfully!`);
+        showNotification(
+          `Image ${
+            newStatus === "active" ? "activated" : "deactivated"
+          } successfully!`
+        );
         loadStats();
       } else {
-        throw new Error('Failed to update status');
+        throw new Error("Failed to update status");
       }
     } catch (error) {
-      console.error('Error updating status:', error);
-      showNotification('Error updating status. Please try again.', 'error');
+      console.error("Error updating status:", error);
+      showNotification("Error updating status. Please try again.", "error");
     }
   };
 
   const handleBulkAction = async () => {
     if (selectedImages.length === 0) {
-      showNotification('Please select images first', 'error');
+      showNotification("Please select images first", "error");
       return;
     }
 
     if (!bulkAction) {
-      showNotification('Please select an action', 'error');
+      showNotification("Please select an action", "error");
       return;
     }
 
     try {
       let requestData = { ids: selectedImages, action: bulkAction };
-      
-      if (bulkAction === 'status') {
-        const status = prompt('Enter status (active/inactive):');
-        if (!status || !['active', 'inactive'].includes(status)) {
-          showNotification('Invalid status', 'error');
+
+      if (bulkAction === "status") {
+        const status = prompt("Enter status (active/inactive):");
+        if (!status || !["active", "inactive"].includes(status)) {
+          showNotification("Invalid status", "error");
           return;
         }
         requestData.data = { status };
-      } else if (bulkAction === 'category') {
-        const category = prompt('Enter new category:');
+      } else if (bulkAction === "category") {
+        const category = prompt("Enter new category:");
         if (!category || !categories.includes(category)) {
-          showNotification('Invalid category', 'error');
+          showNotification("Invalid category", "error");
           return;
         }
         requestData.data = { category };
       }
 
       const response = await fetch(`${API_BASE_URL}/gallery/bulk`, {
-        method: 'POST',
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json'
+          "Content-Type": "application/json",
         },
-        body: JSON.stringify(requestData)
+        body: JSON.stringify(requestData),
       });
 
       if (response.ok) {
         setSelectedImages([]);
-        setBulkAction('');
+        setBulkAction("");
         loadGalleryImages();
         loadStats();
-        showNotification('Bulk action completed successfully!');
+        showNotification("Bulk action completed successfully!");
       } else {
-        throw new Error('Failed to perform bulk action');
+        throw new Error("Failed to perform bulk action");
       }
     } catch (error) {
-      showNotification('Error performing bulk action. Please try again.', 'error');
+      showNotification(
+        "Error performing bulk action. Please try again.",
+        "error"
+      );
     }
   };
 
   const handleImageSelect = (id) => {
-    setSelectedImages(prev => 
-      prev.includes(id) 
-        ? prev.filter(imgId => imgId !== id)
-        : [...prev, id]
+    setSelectedImages((prev) =>
+      prev.includes(id) ? prev.filter((imgId) => imgId !== id) : [...prev, id]
     );
   };
 
@@ -352,7 +400,7 @@ const AboutPageEditor = () => {
     if (selectedImages.length === filteredImages.length) {
       setSelectedImages([]);
     } else {
-      setSelectedImages(filteredImages.map(img => img._id));
+      setSelectedImages(filteredImages.map((img) => img._id));
     }
   };
 
@@ -362,8 +410,8 @@ const AboutPageEditor = () => {
       alt: image.title,
       category: image.category,
       description: image.description,
-      tags: Array.isArray(image.tags) ? image.tags.join(', ') : image.tags,
-      image: null
+      tags: Array.isArray(image.tags) ? image.tags.join(", ") : image.tags,
+      image: null,
     });
     setImagePreview(image.imageUrl);
     setIsModalOpen(true);
@@ -374,45 +422,53 @@ const AboutPageEditor = () => {
 
     try {
       const updateFormData = new FormData();
-      updateFormData.append('title', formData.alt);
-      updateFormData.append('category', formData.category);
-      updateFormData.append('description', formData.description);
-      updateFormData.append('tags', formData.tags);
-      
+      updateFormData.append("title", formData.alt);
+      updateFormData.append("category", formData.category);
+      updateFormData.append("description", formData.description);
+      updateFormData.append("tags", formData.tags);
+
       if (formData.image) {
-        updateFormData.append('image', formData.image);
+        updateFormData.append("image", formData.image);
       }
 
-      const response = await fetch(`${API_BASE_URL}/gallery/${editingImage._id}`, {
-        method: 'PUT',
-        body: updateFormData
-      });
+      const response = await fetch(
+        `${API_BASE_URL}/gallery/${editingImage._id}`,
+        {
+          method: "PUT",
+          body: updateFormData,
+        }
+      );
 
       if (response.ok) {
         const result = await response.json();
-        setGalleryImages(prev => 
-          prev.map(img => img._id === editingImage._id ? result.data : img)
+        setGalleryImages((prev) =>
+          prev.map((img) => (img._id === editingImage._id ? result.data : img))
         );
-        showNotification('Image updated successfully!');
+        showNotification("Image updated successfully!");
         setIsModalOpen(false);
         loadStats();
       } else {
-        throw new Error('Failed to update image');
+        throw new Error("Failed to update image");
       }
     } catch (error) {
-      console.error('Error updating image:', error);
-      showNotification('Error updating image. Please try again.', 'error');
+      console.error("Error updating image:", error);
+      showNotification("Error updating image. Please try again.", "error");
     }
   };
 
-  const filteredImages = galleryImages.filter(image => {
+  const filteredImages = galleryImages.filter((image) => {
     const searchFields = [
-      image.title?.toLowerCase() || '',
-      image.description?.toLowerCase() || '',
-      Array.isArray(image.tags) ? image.tags.join(' ').toLowerCase() : (image.tags?.toLowerCase() || '')
+      image.title?.toLowerCase() || "",
+      image.description?.toLowerCase() || "",
+      Array.isArray(image.tags)
+        ? image.tags.join(" ").toLowerCase()
+        : image.tags?.toLowerCase() || "",
     ];
-    const matchesSearch = searchFields.some(field => field.includes(searchTerm.toLowerCase()));
-    const matchesCategory = !filterCategory || image.category === filterCategory;
+    const matchesSearch = searchFields.some((field) =>
+      field.includes(searchTerm.toLowerCase())
+    );
+    const matchesCategory =
+      !filterCategory || image.category === filterCategory;
     return matchesSearch && matchesCategory;
   });
 
@@ -427,7 +483,7 @@ const AboutPageEditor = () => {
   const handleImageFileChange = (e) => {
     const file = e.target.files[0];
     if (file) {
-      setFormData({...formData, image: file});
+      setFormData({ ...formData, image: file });
       setImagePreview(URL.createObjectURL(file));
     }
   };
@@ -436,14 +492,23 @@ const AboutPageEditor = () => {
     <div className="p-6 max-w-7xl mx-auto">
       {/* Notification */}
       {notification.show && (
-        <div className={`fixed top-6 right-6 z-50 p-4 rounded-xl shadow-2xl flex items-center gap-3 transform transition-all duration-300 ${
-          notification.type === 'success' ? 'bg-emerald-500' : 
-          notification.type === 'error' ? 'bg-red-500' : 'bg-amber-500'
-        } text-white backdrop-blur-sm`}>
+        <div
+          className={`fixed top-6 right-6 z-50 p-4 rounded-xl shadow-2xl flex items-center gap-3 transform transition-all duration-300 ${
+            notification.type === "success"
+              ? "bg-emerald-500"
+              : notification.type === "error"
+              ? "bg-red-500"
+              : "bg-amber-500"
+          } text-white backdrop-blur-sm`}
+        >
           <div className="flex-shrink-0">
-            {notification.type === 'success' ? <Check className="w-5 h-5" /> :
-             notification.type === 'error' ? <AlertCircle className="w-5 h-5" /> :
-             <AlertCircle className="w-5 h-5" />}
+            {notification.type === "success" ? (
+              <Check className="w-5 h-5" />
+            ) : notification.type === "error" ? (
+              <AlertCircle className="w-5 h-5" />
+            ) : (
+              <AlertCircle className="w-5 h-5" />
+            )}
           </div>
           <div className="font-medium">{notification.message}</div>
         </div>
@@ -455,22 +520,34 @@ const AboutPageEditor = () => {
         <div className="relative z-10">
           <div className="flex items-center justify-between">
             <div>
-              <h1 className="text-4xl font-bold mb-2">About Page Gallery Manager</h1>
-              <p className="text-blue-100 text-lg">Complete CRUD operations for About section visual gallery</p>
+              <h1 className="text-4xl font-bold mb-2">
+                About Page Gallery Manager
+              </h1>
+              <p className="text-blue-100 text-lg">
+                Complete CRUD operations for About section visual gallery
+              </p>
             </div>
             <div className="flex items-center gap-4">
               <button
-                onClick={() => setViewMode(viewMode === 'grid' ? 'list' : 'grid')}
+                onClick={() =>
+                  setViewMode(viewMode === "grid" ? "list" : "grid")
+                }
                 className="p-3 bg-white/20 rounded-xl hover:bg-white/30 transition-colors"
               >
-                {viewMode === 'grid' ? <List className="w-6 h-6" /> : <Grid3X3 className="w-6 h-6" />}
+                {viewMode === "grid" ? (
+                  <List className="w-6 h-6" />
+                ) : (
+                  <Grid3X3 className="w-6 h-6" />
+                )}
               </button>
               <button
                 onClick={loadGalleryImages}
                 className="px-6 py-3 bg-white/20 rounded-xl hover:bg-white/30 transition-colors flex items-center gap-2"
                 disabled={loading}
               >
-                <RefreshCw className={`w-5 h-5 ${loading ? 'animate-spin' : ''}`} />
+                <RefreshCw
+                  className={`w-5 h-5 ${loading ? "animate-spin" : ""}`}
+                />
                 Refresh
               </button>
             </div>
@@ -486,7 +563,9 @@ const AboutPageEditor = () => {
               <ImageIcon className="w-6 h-6 text-blue-600" />
             </div>
             <div>
-              <p className="text-2xl font-bold text-gray-900">{stats.total || galleryImages.length}</p>
+              <p className="text-2xl font-bold text-gray-900">
+                {stats.total || galleryImages.length}
+              </p>
               <p className="text-gray-600">Total Images</p>
             </div>
           </div>
@@ -497,7 +576,10 @@ const AboutPageEditor = () => {
               <Eye className="w-6 h-6 text-green-600" />
             </div>
             <div>
-              <p className="text-2xl font-bold text-gray-900">{stats.active || galleryImages.filter(img => img.status === 'active').length}</p>
+              <p className="text-2xl font-bold text-gray-900">
+                {stats.active ||
+                  galleryImages.filter((img) => img.status === "active").length}
+              </p>
               <p className="text-gray-600">Active Images</p>
             </div>
           </div>
@@ -508,7 +590,10 @@ const AboutPageEditor = () => {
               <Filter className="w-6 h-6 text-yellow-600" />
             </div>
             <div>
-              <p className="text-2xl font-bold text-gray-900">{stats.categories?.length || new Set(galleryImages.map(img => img.category)).size}</p>
+              <p className="text-2xl font-bold text-gray-900">
+                {stats.categories?.length ||
+                  new Set(galleryImages.map((img) => img.category)).size}
+              </p>
               <p className="text-gray-600">Categories</p>
             </div>
           </div>
@@ -519,7 +604,11 @@ const AboutPageEditor = () => {
               <Upload className="w-6 h-6 text-red-600" />
             </div>
             <div>
-              <p className="text-2xl font-bold text-gray-900">{stats.inactive || galleryImages.filter(img => img.status === 'inactive').length}</p>
+              <p className="text-2xl font-bold text-gray-900">
+                {stats.inactive ||
+                  galleryImages.filter((img) => img.status === "inactive")
+                    .length}
+              </p>
               <p className="text-gray-600">Inactive Images</p>
             </div>
           </div>
@@ -602,10 +691,13 @@ const AboutPageEditor = () => {
                 )}
               </button>
             </div>
-            
+
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4">
               {selectedFiles.map((fileObj) => (
-                <div key={fileObj.id} className="bg-gray-50 rounded-xl p-3 relative group hover:shadow-lg transition-all duration-300">
+                <div
+                  key={fileObj.id}
+                  className="bg-gray-50 rounded-xl p-3 relative group hover:shadow-lg transition-all duration-300"
+                >
                   <div className="aspect-square rounded-lg overflow-hidden mb-3 relative">
                     <img
                       src={fileObj.preview}
@@ -651,8 +743,10 @@ const AboutPageEditor = () => {
               className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-red-500 focus:border-red-500"
             >
               <option value="">All Categories</option>
-              {categories.map(category => (
-                <option key={category} value={category}>{category}</option>
+              {categories.map((category) => (
+                <option key={category} value={category}>
+                  {category}
+                </option>
               ))}
             </select>
           </div>
@@ -661,7 +755,7 @@ const AboutPageEditor = () => {
             className="px-6 py-3 bg-gray-100 text-gray-700 font-medium rounded-xl hover:bg-gray-200 transition-colors flex items-center gap-2"
             disabled={loading}
           >
-            <RefreshCw className={`w-5 h-5 ${loading ? 'animate-spin' : ''}`} />
+            <RefreshCw className={`w-5 h-5 ${loading ? "animate-spin" : ""}`} />
             Refresh
           </button>
         </div>
@@ -705,13 +799,17 @@ const AboutPageEditor = () => {
       {/* Gallery Grid */}
       <div className="bg-white rounded-xl shadow-lg border border-gray-100 p-6">
         <div className="flex items-center justify-between mb-4">
-          <h2 className="text-xl font-bold text-gray-900">Gallery Images ({filteredImages.length})</h2>
+          <h2 className="text-xl font-bold text-gray-900">
+            Gallery Images ({filteredImages.length})
+          </h2>
           <div className="flex items-center gap-4">
             <button
               onClick={selectAllImages}
               className="text-sm text-blue-600 hover:text-blue-800 font-medium"
             >
-              {selectedImages.length === filteredImages.length ? 'Deselect All' : 'Select All'}
+              {selectedImages.length === filteredImages.length
+                ? "Deselect All"
+                : "Select All"}
             </button>
           </div>
         </div>
@@ -727,29 +825,39 @@ const AboutPageEditor = () => {
         ) : filteredImages.length === 0 ? (
           <div className="text-center py-16">
             <ImageIcon className="w-24 h-24 text-gray-300 mx-auto mb-4" />
-            <h3 className="text-xl font-bold text-gray-900 mb-2">No images found</h3>
+            <h3 className="text-xl font-bold text-gray-900 mb-2">
+              No images found
+            </h3>
             <p className="text-gray-600">Upload some images to get started</p>
           </div>
         ) : (
-          <div className={`grid gap-6 ${
-            viewMode === 'grid' 
-              ? 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4' 
-              : 'grid-cols-1'
-          }`}>
+          <div
+            className={`grid gap-6 ${
+              viewMode === "grid"
+                ? "grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
+                : "grid-cols-1"
+            }`}
+          >
             {filteredImages.map((image) => (
-              <div 
-                key={image._id} 
+              <div
+                key={image._id}
                 className={`bg-gray-50 rounded-xl overflow-hidden hover:shadow-lg transition-all duration-300 group ${
-                  selectedImages.includes(image._id) ? 'ring-2 ring-blue-500' : ''
+                  selectedImages.includes(image._id)
+                    ? "ring-2 ring-blue-500"
+                    : ""
                 }`}
               >
-                <div className={`relative ${viewMode === 'grid' ? 'aspect-video' : 'aspect-[3/1]'} overflow-hidden`}>
-                  <img 
-                    src={image.imageUrl} 
+                <div
+                  className={`relative ${
+                    viewMode === "grid" ? "aspect-video" : "aspect-[3/1]"
+                  } overflow-hidden`}
+                >
+                  <img
+                    src={image.imageUrl}
                     alt={image.title}
                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                   />
-                  
+
                   {/* Selection Checkbox */}
                   <div className="absolute top-3 left-3">
                     <input
@@ -762,7 +870,9 @@ const AboutPageEditor = () => {
 
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300">
                     <div className="absolute bottom-4 left-4 right-4 text-white">
-                      <h4 className="font-bold text-lg mb-1 truncate">{image.title}</h4>
+                      <h4 className="font-bold text-lg mb-1 truncate">
+                        {image.title}
+                      </h4>
                       <p className="text-sm opacity-90">{image.category}</p>
                     </div>
                   </div>
@@ -784,23 +894,31 @@ const AboutPageEditor = () => {
                     <button
                       onClick={() => toggleStatus(image._id)}
                       className={`px-3 py-1 text-xs font-bold rounded-full shadow-lg transition-colors ${
-                        image.status === 'active' 
-                          ? 'bg-emerald-500 text-white' 
-                          : 'bg-gray-500 text-white'
+                        image.status === "active"
+                          ? "bg-emerald-500 text-white"
+                          : "bg-gray-500 text-white"
                       }`}
                     >
                       {image.status}
                     </button>
                   </div>
                 </div>
-                
-                {viewMode === 'grid' && (
+
+                {viewMode === "grid" && (
                   <div className="p-6">
-                    <h3 className="font-bold text-gray-900 mb-2 truncate">{image.title}</h3>
-                    <p className="text-blue-600 text-sm font-medium mb-3">{image.category}</p>
-                    <p className="text-gray-600 text-sm mb-4 line-clamp-2">{image.description}</p>
+                    <h3 className="font-bold text-gray-900 mb-2 truncate">
+                      {image.title}
+                    </h3>
+                    <p className="text-blue-600 text-sm font-medium mb-3">
+                      {image.category}
+                    </p>
+                    <p className="text-gray-600 text-sm mb-4 line-clamp-2">
+                      {image.description}
+                    </p>
                     <div className="flex items-center justify-between text-xs text-gray-500">
-                      <span>{new Date(image.createdAt).toLocaleDateString()}</span>
+                      <span>
+                        {new Date(image.createdAt).toLocaleDateString()}
+                      </span>
                       <span>{formatFileSize(image.fileSize)}</span>
                     </div>
                   </div>
@@ -820,8 +938,8 @@ const AboutPageEditor = () => {
                 <Edit className="w-7 h-7 text-red-600" />
                 Edit Gallery Image
               </h2>
-              <button 
-                onClick={() => setIsModalOpen(false)} 
+              <button
+                onClick={() => setIsModalOpen(false)}
                 className="w-10 h-10 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-full flex items-center justify-center transition-colors"
               >
                 <X className="w-6 h-6" />
@@ -833,9 +951,9 @@ const AboutPageEditor = () => {
                 {/* Image Preview */}
                 <div className="space-y-6">
                   <div className="aspect-video rounded-xl overflow-hidden bg-gray-100">
-                    <img 
-                      src={imagePreview} 
-                      alt="Preview" 
+                    <img
+                      src={imagePreview}
+                      alt="Preview"
                       className="w-full h-full object-cover"
                     />
                   </div>
@@ -855,34 +973,51 @@ const AboutPageEditor = () => {
                 {/* Form Fields */}
                 <div className="space-y-6">
                   <div>
-                    <label className="block text-sm font-bold text-gray-700 mb-2">Image Title</label>
+                    <label className="block text-sm font-bold text-gray-700 mb-2">
+                      Image Title
+                    </label>
                     <input
                       type="text"
                       value={formData.alt}
-                      onChange={(e) => setFormData({...formData, alt: e.target.value})}
+                      onChange={(e) =>
+                        setFormData({ ...formData, alt: e.target.value })
+                      }
                       className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-red-500 focus:border-red-500"
                       placeholder="Enter image title..."
                     />
                   </div>
-                  
+
                   <div>
-                    <label className="block text-sm font-bold text-gray-700 mb-2">Category</label>
+                    <label className="block text-sm font-bold text-gray-700 mb-2">
+                      Category
+                    </label>
                     <select
                       value={formData.category}
-                      onChange={(e) => setFormData({...formData, category: e.target.value})}
+                      onChange={(e) =>
+                        setFormData({ ...formData, category: e.target.value })
+                      }
                       className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-red-500 focus:border-red-500"
                     >
-                      {categories.map(category => (
-                        <option key={category} value={category}>{category}</option>
+                      {categories.map((category) => (
+                        <option key={category} value={category}>
+                          {category}
+                        </option>
                       ))}
                     </select>
                   </div>
 
                   <div>
-                    <label className="block text-sm font-bold text-gray-700 mb-2">Description</label>
+                    <label className="block text-sm font-bold text-gray-700 mb-2">
+                      Description
+                    </label>
                     <textarea
                       value={formData.description}
-                      onChange={(e) => setFormData({...formData, description: e.target.value})}
+                      onChange={(e) =>
+                        setFormData({
+                          ...formData,
+                          description: e.target.value,
+                        })
+                      }
                       rows={4}
                       className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-red-500 focus:border-red-500"
                       placeholder="Describe your image..."
@@ -890,11 +1025,15 @@ const AboutPageEditor = () => {
                   </div>
 
                   <div>
-                    <label className="block text-sm font-bold text-gray-700 mb-2">Tags</label>
+                    <label className="block text-sm font-bold text-gray-700 mb-2">
+                      Tags
+                    </label>
                     <input
                       type="text"
                       value={formData.tags}
-                      onChange={(e) => setFormData({...formData, tags: e.target.value})}
+                      onChange={(e) =>
+                        setFormData({ ...formData, tags: e.target.value })
+                      }
                       className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-red-500 focus:border-red-500"
                       placeholder="marketing, design, creative..."
                     />

@@ -25,7 +25,7 @@ const AddImage = () => {
 
   const fetchImages = async () => {
     try {
-      const response = await fetch("http://localhost:5001/api/images");
+      const response = await fetch("VITE_BACKEND_URL/api/images");
       const data = await response.json();
       console.log(data);
 
@@ -110,13 +110,10 @@ const AddImage = () => {
         const formData = new FormData();
         formData.append("image", fileObj.file);
 
-        const response = await fetch(
-          "http://localhost:5001/api/images/upload",
-          {
-            method: "POST",
-            body: formData,
-          }
-        );
+        const response = await fetch("VITE_BACKEND_URL/api/images/upload", {
+          method: "POST",
+          body: formData,
+        });
 
         return response.json();
       });
@@ -131,7 +128,9 @@ const AddImage = () => {
             failCount > 0 ? `, ${failCount} failed` : ""
           }`
         );
-        selectedFiles.forEach((fileObj) => URL.revokeObjectURL(fileObj.preview));
+        selectedFiles.forEach((fileObj) =>
+          URL.revokeObjectURL(fileObj.preview)
+        );
         setSelectedFiles([]);
         fetchImages();
       } else {
@@ -153,10 +152,9 @@ const AddImage = () => {
     if (!window.confirm("Are you sure you want to delete this image?")) return;
 
     try {
-      const response = await fetch(
-  `http://localhost:5001/api/images/${publicId}`,
-  { method: "DELETE" }
-);
+      const response = await fetch(`VITE_BACKEND_URL/api/images/${publicId}`, {
+        method: "DELETE",
+      });
 
       const data = await response.json();
       if (data.success) {
@@ -164,7 +162,7 @@ const AddImage = () => {
           prev.filter((img) => img.public_id !== publicId)
         );
         setUploadStatus("Image deleted successfully");
-         fetchImages();
+        fetchImages();
       } else {
         setUploadStatus("Failed to delete image");
       }
@@ -201,12 +199,12 @@ const AddImage = () => {
       formData.append("image", file);
 
       const response = await fetch(
-  `http://localhost:5001/api/images/${editingImageId}`,
-  {
-    method: "PUT",
-    body: formData,
-  }
-);
+        `VITE_BACKEND_URL/api/images/${editingImageId}`,
+        {
+          method: "PUT",
+          body: formData,
+        }
+      );
 
       const data = await response.json();
       if (data.success) {
@@ -236,13 +234,19 @@ const AddImage = () => {
     <div className="p-6">
       {/* Header */}
       <div className="mb-8">
-        <h1 className="text-3xl font-bold text-gray-900 mb-2">Image Management</h1>
-        <p className="text-gray-600">Upload and manage images for your website</p>
+        <h1 className="text-3xl font-bold text-gray-900 mb-2">
+          Image Management
+        </h1>
+        <p className="text-gray-600">
+          Upload and manage images for your website
+        </p>
       </div>
 
       {/* Upload Section */}
       <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-8">
-        <h2 className="text-xl font-semibold text-gray-900 mb-6">Upload Images</h2>
+        <h2 className="text-xl font-semibold text-gray-900 mb-6">
+          Upload Images
+        </h2>
 
         {/* Drag & Drop Area */}
         <div

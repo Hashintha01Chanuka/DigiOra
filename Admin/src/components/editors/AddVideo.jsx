@@ -9,7 +9,7 @@ import {
   EyeOff,
 } from "lucide-react";
 
-const API_BASE_URL = "http://localhost:5001/api";
+const API_BASE_URL = "VITE_BACKEND_URL/api";
 
 const AddVideo = () => {
   const [youtubeVideos, setYoutubeVideos] = useState([]);
@@ -326,14 +326,11 @@ const AddVideo = () => {
                 </div>
 
                 {/* Status Badge */}
-                <div className="absolute top-2 left-2">
-                 
-                </div>
+                <div className="absolute top-2 left-2"></div>
 
                 {/* Action Buttons */}
                 <div className="absolute bottom-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity">
                   <div className="flex space-x-2">
-                    
                     <button
                       onClick={(e) => {
                         e.stopPropagation();
@@ -364,9 +361,7 @@ const AddVideo = () => {
                   {video.description}
                 </p>
                 <div className="flex items-center justify-between">
-                  <span className="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded">
-                    
-                  </span>
+                  <span className="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded"></span>
                   <div className="flex items-center space-x-2">
                     <span className="text-xs text-gray-500">
                       {video.views || 0} views

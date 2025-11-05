@@ -8,7 +8,7 @@ const Images = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalImages, setTotalImages] = useState(0);
 
-  const API_BASE_URL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:5001';
+  const API_BASE_URL = import.meta.env.VITE_BACKEND_URL || "VITE_BACKEND_URL";
 
   const IMAGES_PER_PAGE = 12;
 
@@ -28,7 +28,9 @@ const Images = () => {
       if (response.data.success) {
         // Adjusted to match your backend response structure:
         setImages(response.data.data || []); // data is an array of images
-        setTotalImages(response.data.totalCount || response.data.data.length || 0);
+        setTotalImages(
+          response.data.totalCount || response.data.data.length || 0
+        );
       } else {
         setImages([]);
         setTotalImages(0);

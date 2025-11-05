@@ -8,8 +8,7 @@ const Footer = () => {
   const [email, setEmail] = useState("");
   const [isSubscribing, setIsSubscribing] = useState(false);
   const [subscriptionStatus, setSubscriptionStatus] = useState(null); // 'success', 'error', or null
-  const API_BASE_URL =
-    import.meta.env.VITE_BACKEND_URL || "http://localhost:5001";
+  const API_BASE_URL = import.meta.env.VITE_BACKEND_URL || "VITE_BACKEND_URL";
 
   const handleNewsletterSubmit = async (e) => {
     e.preventDefault();

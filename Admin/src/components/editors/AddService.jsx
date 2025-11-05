@@ -1,18 +1,18 @@
 import React, { useState, useEffect, useRef } from "react";
 import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
-import { 
-  Plus, 
-  Edit, 
-  Trash2, 
-  Save, 
-  X, 
+import {
+  Plus,
+  Edit,
+  Trash2,
+  Save,
+  X,
   GripVertical,
   Target,
   Users,
   TrendingUp,
   Award,
   ChevronRight,
-  ArrowRight
+  ArrowRight,
 } from "lucide-react";
 
 const AddService = () => {
@@ -26,7 +26,7 @@ const AddService = () => {
     icon: "Target",
     gradient: "from-red-500 to-red-600",
     order: 0,
-    status: "active"
+    status: "active",
   });
 
   const modalRef = useRef(null);
@@ -38,7 +38,7 @@ const AddService = () => {
     TrendingUp,
     Award,
     ChevronRight,
-    ArrowRight
+    ArrowRight,
   };
 
   // Gradient options
@@ -50,7 +50,7 @@ const AddService = () => {
     "from-green-500 to-green-600",
     "from-purple-500 to-purple-600",
     "from-yellow-500 to-yellow-600",
-    "from-pink-500 to-pink-600"
+    "from-pink-500 to-pink-600",
   ];
 
   // Close modal when clicking outside
@@ -79,9 +79,9 @@ const AddService = () => {
   const fetchServices = async () => {
     try {
       setLoading(true);
-      const response = await fetch("http://localhost:5001/api/services/admin/all");
+      const response = await fetch("VITE_BACKEND_URL/api/services/admin/all");
       const data = await response.json();
-      
+
       if (data.success) {
         setServices(data.data);
       } else {
@@ -101,7 +101,7 @@ const AddService = () => {
         return;
       }
 
-      const response = await fetch("http://localhost:5001/api/services", {
+      const response = await fetch("VITE_BACKEND_URL/api/services", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -119,7 +119,7 @@ const AddService = () => {
           icon: "Target",
           gradient: "from-red-500 to-red-600",
           order: 0,
-          status: "active"
+          status: "active",
         });
         setShowAddModal(false);
         alert("Service added successfully!");
@@ -139,20 +139,25 @@ const AddService = () => {
         return;
       }
 
-      const response = await fetch(`http://localhost:5001/api/services/${editingService._id}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(editingService),
-      });
+      const response = await fetch(
+        `VITE_BACKEND_URL/api/services/${editingService._id}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(editingService),
+        }
+      );
 
       const data = await response.json();
 
       if (data.success) {
-        setServices(services.map(service => 
-          service._id === editingService._id ? data.data : service
-        ));
+        setServices(
+          services.map((service) =>
+            service._id === editingService._id ? data.data : service
+          )
+        );
         setEditingService(null);
         alert("Service updated successfully!");
       } else {
@@ -170,14 +175,17 @@ const AddService = () => {
     }
 
     try {
-      const response = await fetch(`http://localhost:5001/api/services/${serviceId}`, {
-        method: "DELETE",
-      });
+      const response = await fetch(
+        `VITE_BACKEND_URL/api/services/${serviceId}`,
+        {
+          method: "DELETE",
+        }
+      );
 
       const data = await response.json();
 
       if (data.success) {
-        setServices(services.filter(service => service._id !== serviceId));
+        setServices(services.filter((service) => service._id !== serviceId));
         alert("Service deleted successfully!");
       } else {
         alert("Failed to delete service: " + data.message);
@@ -199,13 +207,16 @@ const AddService = () => {
 
     // Update order in database
     try {
-      const response = await fetch("http://localhost:5001/api/services/admin/order", {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ services: items }),
-      });
+      const response = await fetch(
+        "VITE_BACKEND_URL/api/services/admin/order",
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ services: items }),
+        }
+      );
 
       const data = await response.json();
       if (!data.success) {
@@ -234,7 +245,7 @@ const AddService = () => {
       icon: "Target",
       gradient: "from-red-500 to-red-600",
       order: 0,
-      status: "active"
+      status: "active",
     });
   };
 
@@ -249,7 +260,8 @@ const AddService = () => {
               Service Management
             </h1>
             <p className="text-gray-600">
-              Add, edit, delete, and reorder services for the Complete Service Portfolio section
+              Add, edit, delete, and reorder services for the Complete Service
+              Portfolio section
             </p>
           </div>
           <button
@@ -277,7 +289,11 @@ const AddService = () => {
                   {services.map((service, index) => {
                     const IconComponent = iconMap[service.icon] || Target;
                     return (
-                      <Draggable key={service._id} draggableId={service._id} index={index}>
+                      <Draggable
+                        key={service._id}
+                        draggableId={service._id}
+                        index={index}
+                      >
                         {(provided, snapshot) => (
                           <div
                             ref={provided.innerRef}
@@ -288,10 +304,15 @@ const AddService = () => {
                           >
                             <div className="flex items-center justify-between">
                               <div className="flex items-center space-x-4">
-                                <div {...provided.dragHandleProps} className="cursor-grab">
+                                <div
+                                  {...provided.dragHandleProps}
+                                  className="cursor-grab"
+                                >
                                   <GripVertical className="w-5 h-5 text-gray-400" />
                                 </div>
-                                <div className={`w-12 h-12 bg-gradient-to-br ${service.gradient} rounded-lg flex items-center justify-center`}>
+                                <div
+                                  className={`w-12 h-12 bg-gradient-to-br ${service.gradient} rounded-lg flex items-center justify-center`}
+                                >
                                   <IconComponent className="w-6 h-6 text-white" />
                                 </div>
                                 <div className="flex-1">
@@ -302,11 +323,13 @@ const AddService = () => {
                                     {service.description}
                                   </p>
                                   <div className="flex items-center space-x-4 mt-2">
-                                    <span className={`px-2 py-1 rounded-full text-xs font-medium ${
-                                      service.status === 'active' 
-                                        ? 'bg-green-100 text-green-800' 
-                                        : 'bg-gray-100 text-gray-800'
-                                    }`}>
+                                    <span
+                                      className={`px-2 py-1 rounded-full text-xs font-medium ${
+                                        service.status === "active"
+                                          ? "bg-green-100 text-green-800"
+                                          : "bg-gray-100 text-gray-800"
+                                      }`}
+                                    >
                                       {service.status}
                                     </span>
                                     <span className="text-xs text-gray-500">
@@ -323,7 +346,9 @@ const AddService = () => {
                                   <Edit className="w-4 h-4" />
                                 </button>
                                 <button
-                                  onClick={() => handleDeleteService(service._id)}
+                                  onClick={() =>
+                                    handleDeleteService(service._id)
+                                  }
                                   className="p-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors"
                                 >
                                   <Trash2 className="w-4 h-4" />
@@ -347,8 +372,12 @@ const AddService = () => {
             <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
               <Target className="w-8 h-8 text-gray-400" />
             </div>
-            <h3 className="text-lg font-medium text-gray-900 mb-2">No services yet</h3>
-            <p className="text-gray-600 mb-4">Get started by adding your first service</p>
+            <h3 className="text-lg font-medium text-gray-900 mb-2">
+              No services yet
+            </h3>
+            <p className="text-gray-600 mb-4">
+              Get started by adding your first service
+            </p>
             <button
               onClick={() => setShowAddModal(true)}
               className="bg-red-600 text-white px-6 py-3 rounded-lg hover:bg-red-700 transition-colors"
@@ -389,7 +418,10 @@ const AddService = () => {
                     value={currentService.title}
                     onChange={(e) => {
                       if (editingService) {
-                        setEditingService({ ...editingService, title: e.target.value });
+                        setEditingService({
+                          ...editingService,
+                          title: e.target.value,
+                        });
                       } else {
                         setNewService({ ...newService, title: e.target.value });
                       }
@@ -407,14 +439,17 @@ const AddService = () => {
                     value={currentService.icon}
                     onChange={(e) => {
                       if (editingService) {
-                        setEditingService({ ...editingService, icon: e.target.value });
+                        setEditingService({
+                          ...editingService,
+                          icon: e.target.value,
+                        });
                       } else {
                         setNewService({ ...newService, icon: e.target.value });
                       }
                     }}
                     className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-red-500 focus:border-red-500"
                   >
-                    {Object.keys(iconMap).map(iconName => (
+                    {Object.keys(iconMap).map((iconName) => (
                       <option key={iconName} value={iconName}>
                         {iconName}
                       </option>
@@ -431,9 +466,15 @@ const AddService = () => {
                   value={currentService.description}
                   onChange={(e) => {
                     if (editingService) {
-                      setEditingService({ ...editingService, description: e.target.value });
+                      setEditingService({
+                        ...editingService,
+                        description: e.target.value,
+                      });
                     } else {
-                      setNewService({ ...newService, description: e.target.value });
+                      setNewService({
+                        ...newService,
+                        description: e.target.value,
+                      });
                     }
                   }}
                   className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-red-500 focus:border-red-500"
@@ -451,14 +492,20 @@ const AddService = () => {
                     value={currentService.gradient}
                     onChange={(e) => {
                       if (editingService) {
-                        setEditingService({ ...editingService, gradient: e.target.value });
+                        setEditingService({
+                          ...editingService,
+                          gradient: e.target.value,
+                        });
                       } else {
-                        setNewService({ ...newService, gradient: e.target.value });
+                        setNewService({
+                          ...newService,
+                          gradient: e.target.value,
+                        });
                       }
                     }}
                     className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-red-500 focus:border-red-500"
                   >
-                    {gradientOptions.map(gradient => (
+                    {gradientOptions.map((gradient) => (
                       <option key={gradient} value={gradient}>
                         {gradient}
                       </option>
@@ -474,9 +521,15 @@ const AddService = () => {
                     value={currentService.status}
                     onChange={(e) => {
                       if (editingService) {
-                        setEditingService({ ...editingService, status: e.target.value });
+                        setEditingService({
+                          ...editingService,
+                          status: e.target.value,
+                        });
                       } else {
-                        setNewService({ ...newService, status: e.target.value });
+                        setNewService({
+                          ...newService,
+                          status: e.target.value,
+                        });
                       }
                     }}
                     className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-red-500 focus:border-red-500"
@@ -489,18 +542,26 @@ const AddService = () => {
 
               {/* Preview */}
               <div className="border border-gray-200 rounded-lg p-4 bg-gray-50">
-                <h4 className="text-sm font-medium text-gray-700 mb-3">Preview</h4>
+                <h4 className="text-sm font-medium text-gray-700 mb-3">
+                  Preview
+                </h4>
                 <div className="bg-white p-4 rounded-lg shadow-sm">
                   <div className="flex items-center space-x-4">
-                    <div className={`w-12 h-12 bg-gradient-to-br ${currentService.gradient} rounded-lg flex items-center justify-center`}>
-                      {iconMap[currentService.icon] && React.createElement(iconMap[currentService.icon], { className: "w-6 h-6 text-white" })}
+                    <div
+                      className={`w-12 h-12 bg-gradient-to-br ${currentService.gradient} rounded-lg flex items-center justify-center`}
+                    >
+                      {iconMap[currentService.icon] &&
+                        React.createElement(iconMap[currentService.icon], {
+                          className: "w-6 h-6 text-white",
+                        })}
                     </div>
                     <div>
                       <h5 className="font-semibold text-gray-900">
                         {currentService.title || "Service Title"}
                       </h5>
                       <p className="text-sm text-gray-600">
-                        {currentService.description || "Service description will appear here"}
+                        {currentService.description ||
+                          "Service description will appear here"}
                       </p>
                     </div>
                   </div>
@@ -516,7 +577,9 @@ const AddService = () => {
                 Cancel
               </button>
               <button
-                onClick={editingService ? handleUpdateService : handleAddService}
+                onClick={
+                  editingService ? handleUpdateService : handleAddService
+                }
                 className="flex-1 px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 transition-colors flex items-center justify-center space-x-2"
               >
                 <Save className="w-4 h-4" />

@@ -14,7 +14,7 @@ const Services = () => {
   const [videos, setVideos] = useState([]);
   const [loadingVideos, setLoadingVideos] = useState(true);
 
-  const API_BASE_URL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:5001';
+  const API_BASE_URL = import.meta.env.VITE_BACKEND_URL || "VITE_BACKEND_URL";
 
   useEffect(() => {
     const observer = new window.IntersectionObserver(
@@ -94,7 +94,7 @@ const Services = () => {
   };
 
   const handleGetStarted = () => {
-    navigate('/contact');
+    navigate("/contact");
   };
 
   const services = [
@@ -173,16 +173,15 @@ const Services = () => {
               What We Do
             </div>
             <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6 leading-tight">
-              At DigiOra Media We Offer <span className="text-red-600">The Best Of Every World</span>
+              At DigiOra Media We Offer{" "}
+              <span className="text-red-600">The Best Of Every World</span>
             </h2>
             <p className="text-xl text-gray-600 max-w-4xl mx-auto leading-relaxed font-light mb-8">
               In a complex digital landscape that doesn't stop evolving, we
               champion agility by partnering with the best technologies and
               strategies to deliver exceptional results.
             </p>
-            <div className="scroll-animation delay-200">
-             
-            </div>
+            <div className="scroll-animation delay-200"></div>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -206,7 +205,6 @@ const Services = () => {
                     {service.description}
                   </p>
                 </div>
-              
               </div>
             ))}
           </div>
@@ -220,7 +218,7 @@ const Services = () => {
                 Let's discuss how our comprehensive digital marketing solutions
                 can drive your business forward.
               </p>
-              <button 
+              <button
                 onClick={handleGetStarted}
                 className="bg-white text-red-600 px-8 py-4 rounded-xl font-medium hover:bg-gray-100 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
               >
