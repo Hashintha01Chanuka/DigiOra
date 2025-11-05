@@ -9,7 +9,7 @@ import {
   EyeOff,
 } from "lucide-react";
 
-const API_BASE_URL = "VITE_BACKEND_URL/api";
+const API_BASE_URL = "https://digi-ora-backend.vercel.app//api";
 
 const AddVideo = () => {
   const [youtubeVideos, setYoutubeVideos] = useState([]);

@@ -14,7 +14,7 @@ const Services = () => {
   const [videos, setVideos] = useState([]);
   const [loadingVideos, setLoadingVideos] = useState(true);
 
-  const API_BASE_URL = import.meta.env.VITE_BACKEND_URL || "VITE_BACKEND_URL";
+  const API_BASE_URL = import.meta.env.https://digi-ora-backend.vercel.app/ || "https://digi-ora-backend.vercel.app/";
 
   useEffect(() => {
     const observer = new window.IntersectionObserver(

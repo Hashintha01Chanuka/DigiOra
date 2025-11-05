@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 export const AppContext = createContext();
 
 export const AppContextProvider = (props) => {
-  const backendUrl = import.meta.env.VITE_BACKEND_URL;
+  const backendUrl = import.meta.env.https://digi-ora-backend.vercel.app/;
 
   const navigate = useNavigate();
 

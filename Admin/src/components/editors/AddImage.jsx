@@ -25,7 +25,9 @@ const AddImage = () => {
 
   const fetchImages = async () => {
     try {
-      const response = await fetch("VITE_BACKEND_URL/api/images");
+      const response = await fetch(
+        "https://digi-ora-backend.vercel.app//api/images"
+      );
       const data = await response.json();
       console.log(data);
 
@@ -110,10 +112,13 @@ const AddImage = () => {
         const formData = new FormData();
         formData.append("image", fileObj.file);
 
-        const response = await fetch("VITE_BACKEND_URL/api/images/upload", {
-          method: "POST",
-          body: formData,
-        });
+        const response = await fetch(
+          "https://digi-ora-backend.vercel.app//api/images/upload",
+          {
+            method: "POST",
+            body: formData,
+          }
+        );
 
         return response.json();
       });
@@ -152,9 +157,12 @@ const AddImage = () => {
     if (!window.confirm("Are you sure you want to delete this image?")) return;
 
     try {
-      const response = await fetch(`VITE_BACKEND_URL/api/images/${publicId}`, {
-        method: "DELETE",
-      });
+      const response = await fetch(
+        `https://digi-ora-backend.vercel.app//api/images/${publicId}`,
+        {
+          method: "DELETE",
+        }
+      );
 
       const data = await response.json();
       if (data.success) {
@@ -199,7 +207,7 @@ const AddImage = () => {
       formData.append("image", file);
 
       const response = await fetch(
-        `VITE_BACKEND_URL/api/images/${editingImageId}`,
+        `https://digi-ora-backend.vercel.app//api/images/${editingImageId}`,
         {
           method: "PUT",
           body: formData,

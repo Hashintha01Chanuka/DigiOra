@@ -54,7 +54,7 @@ const ServicesPage = () => {
   const [fetchedServices, setFetchedServices] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const API_BASE_URL = import.meta.env.VITE_BACKEND_URL || "VITE_BACKEND_URL";
+  const API_BASE_URL = import.meta.env.https://digi-ora-backend.vercel.app/ || "https://digi-ora-backend.vercel.app/";
 
   useEffect(() => {
     const fetchServices = async () => {

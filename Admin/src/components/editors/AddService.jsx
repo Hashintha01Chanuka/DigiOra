@@ -79,7 +79,9 @@ const AddService = () => {
   const fetchServices = async () => {
     try {
       setLoading(true);
-      const response = await fetch("VITE_BACKEND_URL/api/services/admin/all");
+      const response = await fetch(
+        "https://digi-ora-backend.vercel.app//api/services/admin/all"
+      );
       const data = await response.json();
 
       if (data.success) {
@@ -101,13 +103,16 @@ const AddService = () => {
         return;
       }
 
-      const response = await fetch("VITE_BACKEND_URL/api/services", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(newService),
-      });
+      const response = await fetch(
+        "https://digi-ora-backend.vercel.app//api/services",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(newService),
+        }
+      );
 
       const data = await response.json();
 
@@ -140,7 +145,7 @@ const AddService = () => {
       }
 
       const response = await fetch(
-        `VITE_BACKEND_URL/api/services/${editingService._id}`,
+        `https://digi-ora-backend.vercel.app//api/services/${editingService._id}`,
         {
           method: "PUT",
           headers: {
@@ -176,7 +181,7 @@ const AddService = () => {
 
     try {
       const response = await fetch(
-        `VITE_BACKEND_URL/api/services/${serviceId}`,
+        `https://digi-ora-backend.vercel.app//api/services/${serviceId}`,
         {
           method: "DELETE",
         }
@@ -208,7 +213,7 @@ const AddService = () => {
     // Update order in database
     try {
       const response = await fetch(
-        "VITE_BACKEND_URL/api/services/admin/order",
+        "https://digi-ora-backend.vercel.app//api/services/admin/order",
         {
           method: "PUT",
           headers: {

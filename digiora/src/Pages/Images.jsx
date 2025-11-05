@@ -8,7 +8,7 @@ const Images = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalImages, setTotalImages] = useState(0);
 
-  const API_BASE_URL = import.meta.env.VITE_BACKEND_URL || "VITE_BACKEND_URL";
+  const API_BASE_URL = import.meta.env.https://digi-ora-backend.vercel.app/ || "https://digi-ora-backend.vercel.app/";
 
   const IMAGES_PER_PAGE = 12;
 
