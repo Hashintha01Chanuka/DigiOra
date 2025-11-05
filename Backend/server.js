@@ -23,6 +23,7 @@ app.use(
       "VITE_BACKEND_URL", // Add backend port for testing
       "https://digi-ora-frontend.vercel.app",
       "https://www.digioramedia.com",
+      "https://digi-ora-admin.vercel.app",
     ],
     credentials: true,
   })
